@@ -1,16 +1,18 @@
 version: '3'
 services:
-  express-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  app:
+    build: .
     ports:
       - '3000:3000'
     depends_on:
       - mongo
     environment:
-      MONGODB_URI: 'mongodb://mongo:27017/todo_app'
+      MONGODB_URI: 'mongodb://mongo:27017/todo_app' # Updated to use the service name
   mongo:
-    image: mongo:latest
+    image: 'mongo:latest'
     ports:
       - '27017:27017'
+    volumes:
+      - 'mongo-data:/data/db'
+volumes:
+  mongo-data:
