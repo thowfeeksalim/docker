@@ -71,43 +71,32 @@ Merge the CI and CD workflows in the `.github/workflows/` directory of your repo
 
 
    ```yaml
-   name: Docker Image CI
-    
+   name: Build and Push Docker Image
+
    on:
-     push:
-       branches: [ "master" ]
-     pull_request:
-       branches: [ "master" ]
+   push:
+      branches:
+         - main
 
    jobs:
-     build:
-       runs-on: ubuntu-latest
+   build:
+      runs-on: ubuntu-latest
 
-       steps:
+      steps:
          - name: Checkout code
-           uses: actions/checkout@v2
+         uses: actions/checkout@v2
 
          - name: Login to Docker Hub
-           uses: docker/login-action@v1
-           with:
-             username: ${{ secrets.DOCKERHUB_USERNAME }}
-             password: ${{ secrets.DOCKERHUB_TOKEN }}
+         uses: docker/login-action@v1
+         with:
+            username: ${{ secrets.DOCKERHUB_USERNAME }}
+            password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-         - name: Pull Docker image with tag 'latest'
-           run: |
-             docker pull thowfeeksalim/todo:latest
+         - name: Build and Push Docker Image
+         run: |
+            docker build -t thowfeeksalim/docker-old .
+            docker push thowfeeksalim/docker-old
 
-         - name: Build and Push Docker image
-           id: docker_build
-           run: |
-             docker build . --file Dockerfile --tag thowfeeksalim/todo
-             docker push thowfeeksalim/todo
-
-         - name: Check for errors
-           if: steps.docker_build.outcome != 'success'
-           run: |
-             echo "An error occurred during image build and push."
-             exit 1
    ```
    
 
