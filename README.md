@@ -114,6 +114,3 @@ By harnessing the power of GitHub Actions, you have the capability to construct 
 
 ![CI/CD Conclusion](https://miro.medium.com/v2/resize:fit:1400/1*1u_tn1HTmdi_zYEox2cTVA.gif)
 
----
-
-Feel free to adjust the instructions and layout as needed. This README now includes the additional commands for pushing and pulling Docker images, as well as deploying the application using Docker Compose.
