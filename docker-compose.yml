@@ -7,7 +7,7 @@ services:
     depends_on:
       - mongo
     environment:
-      MONGODB_URI: 'mongodb://mongo:27017/todo_app'
+      MONGODB_URI: 'mongodb://mongo:27017/todo_app' # Updated to use the service name
   mongo:
     image: 'mongo:latest'
     ports:
