@@ -76,7 +76,7 @@ Merge the CI and CD workflows in the `.github/workflows/` directory of your repo
    on:
    push:
       branches:
-         - main
+         - master
 
    jobs:
    build:
@@ -96,7 +96,6 @@ Merge the CI and CD workflows in the `.github/workflows/` directory of your repo
          run: |
             docker build -t thowfeeksalim/docker-old .
             docker push thowfeeksalim/docker-old
-
    ```
    
 
