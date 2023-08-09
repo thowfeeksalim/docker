@@ -1,12 +1,9 @@
 
-# Build CI/CD Pipeline using GitHub Actions 
-
-
+# Build CI/CD Pipeline using GitHub Actions
 
 <p align="center">
    <img src="https://i.ytimg.com/vi/k13j5aKtuDU/maxresdefault.jpg" width="700"  />
 </p>
-
 
 Welcome to the tutorial on creating a powerful Continuous Integration and Continuous Deployment (CI/CD) pipeline using GitHub Actions. In this guide, we'll walk you through the process of automating your software development workflow, from code integration and testing to seamless deployment.
 
@@ -69,41 +66,54 @@ To embark on this journey, you'll need:
 
 Merge the CI and CD workflows in the `.github/workflows/` directory of your repository.
 
+```yaml
+name: Build and Push Docker Image
 
-   ```yaml
-   name: Build and Push Docker Image
+on:
+  push:
+    branches:
+      - master
 
-   on:
-   push:
-      branches:
-         - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-   jobs:
-   build:
-      runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      steps:
-         - name: Checkout code
-         uses: actions/checkout@v2
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-         - name: Login to Docker Hub
-         uses: docker/login-action@v1
-         with:
-            username: ${{ secrets.DOCKERHUB_USERNAME }}
-            password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t thowfeeksalim/docker-old .
+          docker push thowfeeksalim/docker-old
+```
 
-         - name: Build and Push Docker Image
-         run: |
-            docker build -t thowfeeksalim/docker-old .
-            docker push thowfeeksalim/docker-old
-   ```
-   
+## Deploying the Application
+
+After successfully building and pushing the Docker image to Docker Hub, you can deploy the application using Docker Compose. Run the following commands:
+
+```bash
+# Pull the latest Docker image
+docker pull thowfeeksalim/docker-old:latest
+
+# Run the application using Docker Compose
+docker-compose up --build --detach
+```
+
+Congratulations! Your CI/CD pipeline is now automating the build, testing, and deployment of your application.
 
 ## Conclusion
 
 By harnessing the power of GitHub Actions, you have the capability to construct robust CI/CD pipelines that streamline your software development lifecycle. While this tutorial provides an essential foundation, remember that the world of CI/CD offers further exploration and customization tailored to your project's unique requirements.
 
-
 ![CI/CD Conclusion](https://miro.medium.com/v2/resize:fit:1400/1*1u_tn1HTmdi_zYEox2cTVA.gif)
 
-```
+---
+
+Feel free to adjust the instructions and layout as needed. This README now includes the additional commands for pushing and pulling Docker images, as well as deploying the application using Docker Compose.
