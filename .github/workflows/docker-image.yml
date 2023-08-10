@@ -1,4 +1,4 @@
-name: Build, Push Docker Image, and Push docker-compose.yml
+name: Build and Push Docker Image with Compose File
 
 on:
   push:
@@ -19,15 +19,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Build and Push Docker Image
+      - name: Build Docker Image with Compose File
         run: |
-          docker build -t thowfeeksalim/docker-old .
+          docker build -t thowfeeksalim/docker-old -f Dockerfile-with-compose .
           docker push thowfeeksalim/docker-old
-
-      - name: Push docker-compose.yml
-        run: |
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
-          git add docker-compose.yml
-          git commit -m "Update docker-compose.yml"
-          git push
