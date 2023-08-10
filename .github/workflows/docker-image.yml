@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build, Push Docker Image, and Upload docker-compose.yml
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build:
+  build_and_push:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,3 +23,7 @@ jobs:
         run: |
           docker build -t thowfeeksalim/docker-old .
           docker push thowfeeksalim/docker-old
+
+      - name: Upload docker-compose.yml to Docker Hub
+        run: |
+          docker run --rm -v $PWD:/workdir -w /workdir alpine sh -c "cp docker-compose.yml  /docker-compose.yml"
