@@ -1,4 +1,4 @@
-name: Build and Push Docker Image with Compose File
+name: Build and Push Docker Image
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build_and_push:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,7 +19,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Build Docker Image with Compose File
+      - name: Build and Push Docker Image
         run: |
-          docker build -t thowfeeksalim/docker-old -f Dockerfile-with-compose .
+          docker build -t thowfeeksalim/docker-old .
           docker push thowfeeksalim/docker-old
