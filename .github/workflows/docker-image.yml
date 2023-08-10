@@ -30,8 +30,6 @@ jobs:
 
       - name: Restart Locally
         run: |
-          docker stop edee883d5e36
-          docker stop 0e6c07f668e2
           docker pull thowfeeksalim/docker-old:latest
           docker-compose -f C:\jul\docker-old\docker-compose.yml up -d
           docker compose up --build --detach
