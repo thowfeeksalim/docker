@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build, Push Docker Image, and Push docker-compose.yml
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build:
+  build_and_push:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,3 +23,11 @@ jobs:
         run: |
           docker build -t thowfeeksalim/docker-old .
           docker push thowfeeksalim/docker-old
+
+      - name: Push docker-compose.yml
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git add docker-compose.yml
+          git commit -m "Update docker-compose.yml"
+          git push
