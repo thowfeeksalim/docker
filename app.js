@@ -26,6 +26,16 @@ app.get('/todos', async (req, res) => {
     res.status(500).json({ error: 'Error retrieving todos' });
   }
 });
+app.get('/version', async (req, res) => {
+  try {
+    const todos = await Todo.find();
+    res.json({"version":"1.0.0"});
+  } catch (err) {
+    res.status(500).json({ error: 'Error retrieving todos' });
+  }
+});
+
+
 
 app.post('/todos', async (req, res) => {
   try {
