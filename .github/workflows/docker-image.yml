@@ -30,7 +30,7 @@ jobs:
 
       - name: Restart Locally
         run: |
-          # docker pull thowfeeksalim/docker-old:latest
-          # docker compose up --build --detach
-          # docker run -d thowfeeksalim/docker-old:latest
+          docker pull thowfeeksalim/docker-old:latest
+          docker compose up --build --detach
+          docker run -d thowfeeksalim/docker-old:latest
 
