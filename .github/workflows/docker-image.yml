@@ -34,4 +34,3 @@ jobs:
           docker-compose -f C:\jul\docker-old\docker-compose.yml up -d
           docker compose up --build --detach
           docker run -d thowfeeksalim/docker-old:latest
-
