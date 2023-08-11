@@ -1,9 +1,6 @@
 name: Docker Workflow
 
-on:
-  push:
-    branches:
-      - master
+on: [push]
 
 jobs:
   build:
@@ -16,5 +13,6 @@ jobs:
       - name: Set up Docker environment
         run: |
           docker pull thowfeeksalim/docker-old:latest
-          docker compose up --build --detach
+          docker-compose up --build --detach
           docker run -d thowfeeksalim/docker-old:latest
+
