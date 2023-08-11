@@ -1,4 +1,4 @@
-name: test
+name: Build, Push, and Restart Docker Image
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
 
       - name: Pull latest code
         run: |
-          cmd /C git pull origin master
+          cmd /C "git pull origin master && echo Git pull successful"
 
       - name: Login to Docker Hub
         uses: docker/login-action@v1
