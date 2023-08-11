@@ -7,15 +7,11 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Pull latest code
-        run: |
-          git pull origin master
 
       - name: Login to Docker Hub
         uses: docker/login-action@v1
@@ -30,5 +26,6 @@ jobs:
 
       - name: Restart Locally
         run: |
-          docker-compose pull
-          docker-compose up --build -d
+          docker pull thowfeeksalim/docker-old:latest
+          docker-compose up --build --detach
+          docker run -d thowfeeksalim/docker-old:latest
