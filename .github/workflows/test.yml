@@ -1,5 +1,4 @@
-name: Build, Push, and Restart Docker Image
-
+name: test
 on:
   push:
     branches:
