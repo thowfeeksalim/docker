@@ -11,17 +11,18 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Run PowerShell command
+      - name: Run PowerShell commands
+        shell: cmd
         run: |
           # Download the PowerShell Core MSI installer
           Invoke-WebRequest -Uri https://github.com/PowerShell/PowerShell/releases/download/v7.2.0-preview.9/PowerShell-7.2.0-preview.9-win-x64.msi -OutFile PowerShell.msi
           # Install PowerShell Core
           start /wait msiexec /i PowerShell.msi /qn
-
-      - name: Run Docker commands
-        shell: cmd
-        run: |
-          # Your Docker commands here
-          docker pull thowfeeksalim/docker-old:latest
-          docker-compose up --build --detach
-          docker run -d thowfeeksalim/docker-old:latest
+          
+          # Run Docker commands using PowerShell
+          "C:\Program Files\PowerShell\7\pwsh.exe" -Command {
+            # Your Docker commands here
+            docker pull thowfeeksalim/docker-old:latest
+            docker-compose up --build --detach
+            docker run -d thowfeeksalim/docker-old:latest
+          }
