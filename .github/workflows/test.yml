@@ -11,14 +11,12 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
+ 
+      - name: Run PowerShell command
+        shell: pwsh
+        run: |
+          docker pull thowfeeksalim/docker-old:latest
 
-      - name: Pull the latest Docker image
-        run: docker pull thowfeeksalim/docker-old:latest
+	        docker-compose up --build --detach
 
-      - name: Start Docker Compose services
-        run: docker-compose up --build --detach
-
-      - name: Run Docker container in detached mode
-        run: docker run -d thowfeeksalim/docker-old:latest
+	        docker run -d thowfeeksalim/docker-old:latest
