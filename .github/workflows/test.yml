@@ -14,12 +14,6 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
-      - name: Run PowerShell as administrator
-        shell: pwsh
-        run: |
-          # Set PowerShell execution policy as bypass
-          Set-ExecutionPolicy Bypass -Scope Process -Force
-
       - name: Pull the latest Docker image
         run: docker pull thowfeeksalim/docker-old:latest
 
