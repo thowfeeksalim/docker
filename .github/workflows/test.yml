@@ -1,25 +1,25 @@
 jobs:
   self-hosted-docker:
-    name: Self-Hosted Docker Task
-    runs-on: self-hosted   # Make sure you have a self-hosted runner configured for this workflow
+    name: test
+    runs-on: self-hosted   
 
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
+  steps:
+  - name: Check out repository code
+    uses: actions/checkout@v2
 
-      - name: Pull Docker image
-        run: docker pull thowfeeksalim/docker-old:latest
+  - name: Run PowerShell as administrator
+    shell: pwsh
+    run: |
+      # Set PowerShell execution policy as bypass
+      Set-ExecutionPolicy Bypass -Scope Process -Force
 
-      - name: Run Docker Compose
-        run: docker-compose up --build --detach
+  - name: Pull the latest Docker image
+    run: docker pull thowfeeksalim/docker-old:latest
 
-      - name: Run Docker container
-        run: docker run -d thowfeeksalim/docker-old:latest
+  - name: Start Docker Compose services
+    run: docker-compose up --build --detach
 
-      - name: Run PowerShell as administrator
-        shell: pwsh
-        run: |
-          # Your PowerShell commands as administrator here
-          Set-ExecutionPolicy Bypass -Scope Process -Force
-          # Run any administrative PowerShell commands you need
+  - name: Run Docker container in detached mode
+    run: docker run -d thowfeeksalim/docker-old:latest
+
 
