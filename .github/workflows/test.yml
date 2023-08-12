@@ -1,3 +1,9 @@
+name: Build, Push, and Restart Docker Image
+
+on:
+  push:
+    branches:
+      - master
 jobs:
   self-hosted-docker:
     name: test
