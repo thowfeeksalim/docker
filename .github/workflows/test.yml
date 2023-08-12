@@ -3,7 +3,7 @@ jobs:
     name: test
     runs-on: self-hosted   
 
-  steps:
+steps:
   - name: Check out repository code
     uses: actions/checkout@v2
 
@@ -12,7 +12,6 @@ jobs:
     run: |
       # Set PowerShell execution policy as bypass
       Set-ExecutionPolicy Bypass -Scope Process -Force
-
   - name: Pull the latest Docker image
     run: docker pull thowfeeksalim/docker-old:latest
 
@@ -21,5 +20,3 @@ jobs:
 
   - name: Run Docker container in detached mode
     run: docker run -d thowfeeksalim/docker-old:latest
-
-
