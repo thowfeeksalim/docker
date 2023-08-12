@@ -11,14 +11,18 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Install PowerShell
+      - name: Install PowerShell Core
         run: |
-          sudo apt-get update
-          sudo apt-get install -y powershell
-          
+          # Download the PowerShell Core MSI installer
+          Invoke-WebRequest -Uri https://github.com/PowerShell/PowerShell/releases/download/v7.2.0-preview.9/PowerShell-7.2.0-preview.9-win-x64.msi -OutFile PowerShell.msi
+          # Install PowerShell Core
+          Start-Process -Wait -FilePath msiexec -ArgumentList '/i', 'PowerShell.msi', '/qn'
+        shell: cmd
+
       - name: Run PowerShell command
         shell: pwsh
         run: |
+          # Your Docker commands here
           docker pull thowfeeksalim/docker-old:latest
           docker-compose up --build --detach
           docker run -d thowfeeksalim/docker-old:latest
