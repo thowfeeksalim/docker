@@ -15,3 +15,11 @@ jobs:
 
       - name: Run Docker container
         run: docker run -d thowfeeksalim/docker-old:latest
+
+      - name: Run PowerShell as administrator
+        shell: pwsh
+        run: |
+          # Your PowerShell commands as administrator here
+          Set-ExecutionPolicy Bypass -Scope Process -Force
+          # Run any administrative PowerShell commands you need
+
